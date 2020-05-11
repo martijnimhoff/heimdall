@@ -1,0 +1,12 @@
+[req]
+prompt = no
+default_md = sha256
+distinguished_name = dn
+
+[dn]
+C=NL
+ST=Noord-brabant
+L=Eindhoven
+O=End Point
+OU=Testing Domain
+emailAddress=martijn@code337.rocks
