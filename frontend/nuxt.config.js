@@ -1,5 +1,8 @@
 export default {
   mode: 'universal',
+  env: {
+    apiURL: process.env.API_URL || 'http://127.12.1.1'
+  },
   /*
   ** Headers of the page
   */
@@ -21,7 +24,10 @@ export default {
   /*
   ** Global CSS
   */
-  css: [],
+  css: [
+    '@/assets/scss/global.scss',
+    '@/assets/scss/spacing.scss'
+  ],
   /*
   ** Plugins to load before mounting the App
   */
@@ -38,16 +44,51 @@ export default {
   modules: [
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
+    '@nuxtjs/style-resources',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    // Doc: https://auth.nuxtjs.org/
+    '@nuxtjs/auth'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
+  axios: {
+    baseURL: 'http://heimdall.local',
+    credentials: true
+  },
+  /*
+  * Auth module configuration
+  * see: https://auth.nuxtjs.org/
+  */
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/'
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: {url: '/login', method: 'post', propertyName: false},
+          user: {url: '/api/user', method: 'get', propertyName: false},
+          logout: {url: '/logout', method: 'post'}
+        },
+        tokenRequired: false,
+        tokenType: false
+      }
+    },
+    localStorage: false
+  },
+  /*
+  ** Router config
+  */
+  router: {
+    middleware: ['auth']
+  },
   /*
   ** Build configuration
   */

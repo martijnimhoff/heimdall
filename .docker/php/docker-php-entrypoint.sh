@@ -15,15 +15,6 @@ configure_user() {
     useradd -o --shell /bin/bash -u $HOST_UID -g $HOST_GID -m $USERNAME || true
 }
 
-configure_composer() {
-    if [ -z "$GITLAB_ACCESS_TOKEN" ]; then
-        die 'Environment variable GITLAB_ACCESS_TOKEN is not set'
-    else
-        echo 'Adding Gitlab Access Token to Composer config'
-        sudo -u $USERNAME composer config -g gitlab-token.gitlab.com "$GITLAB_ACCESS_TOKEN"
-    fi
-}
-
 configure_xdebug() {
     echo "XDEBUG - Deleting old config"
     rm -f $PHP_INI_DIR/conf.d/xdebug.ini
@@ -54,14 +45,6 @@ configure_timezone() {
     echo "date.timezone = \"Europe/Amsterdam\"" > "$PHP_INI_DIR/conf.d/timezone.ini"
 }
 
-composer_install() {
-    if [ -z "$SKIP_COMPOSER_INSTALL" ]; then
-        sudo -u $USERNAME composer install --prefer-dist
-    else
-         warn 'Composer Install was skipped'
-    fi
-}
-
 configure_aliases() {
     if [ -e '/home/php/alias_set' ]; then
         warn 'Aliases already set'
@@ -87,11 +70,9 @@ alias yrp="yarn run production"' >> /home/php/.bashrc
 }
 
 configure_user
-#configure_composer
 configure_xdebug
 configure_timezone
 configure_aliases
-#composer_install
 
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then

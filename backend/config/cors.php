@@ -15,11 +15,14 @@ return [
     |
     */
 
-    'paths' => ['api/*'],
+    'paths' => ['*'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        'http://heimdall.local:3000'
+        // env('FRONTEND_URL', '*'),
+    ],
 
     'allowed_origins_patterns' => [],
 

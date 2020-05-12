@@ -20,8 +20,7 @@ cp ./backend/.env.example ./backend/.env
 docker network create heimdall-global
 ```
 - Spin up the docker containers with the command below. This will create a php, 
-    nginx, postgres and frontend container. The front-end container 
-    automatically builds the frontend and triggers a rebuild when files change.
+    nginx, postgres and frontend container.
 ```
 docker-compose up
 ``` 
@@ -29,12 +28,22 @@ docker-compose up
 ```
 docker-compose exec -u php php bash
 ```
-- For the backend we manually need to install depencencies, generate a key, 
+- For the backend we manually need to install dependencies, generate a key, 
     migrate the database and seed it:
 ```
 composer install \
  && php artisan key:generate \
  && php artisan migrate:fresh --seed
+```
+- Open another terminal tab for the frontend. And exec into its container:
+```
+docker-compose exec frontend bash 
+```
+- Install and build the frontend with the following command:
+```
+npm install \
+ && npm run dev 
+# ignore the url in the output
 ```
 - The frontend is accessible on: http://127.12.1.1:3000/
 - The backend is accessible on: http://127.12.1.1/
@@ -51,6 +60,9 @@ composer install \
 
 ## Database diagram: 
 https://app.diagrams.net/#G1gX2SlT6ayrsmtyJyJGoaQMoiMYClfyh2
+
+## logo editor:
+https://logomakr.com/2LuY63
 
 ## Todo / Refactor ideas:
 
