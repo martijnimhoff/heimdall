@@ -1,50 +1,64 @@
 version: '3'
 
 services:
+  frontend:
+    image: node:14.2.0
+    ports:
+      - "127.12.1.1:3000:3000"
+    command: npm run dev
+    volumes:
+      - ./frontend:/usr/src/app
+    working_dir: /usr/src/app
+    environment:
+      HOST: 0.0.0.0
+    networks:
+      internal-network:
+      heimdall-global:
+        aliases:
+          - heimdall-frontend
+
   postgres:
     image: postgres:11.3
     ports:
-      - 127.12.1.1:5432:5432
+      - "127.12.1.1:5432:5432"
     volumes:
       - postgres:/var/lib/postgres
     env_file:
-      - .env
-    environment:
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - ./backend/.env
     networks:
       internal-network:
-      heimdall-backend-global:
+      heimdall-global:
         aliases:
           - heimdall-backend-postgres
 
   nginx:
     build: .docker/nginx
     ports:
-      - 127.12.1.1:80:80
+      - "127.12.1.1:80:80"
     volumes:
-       - ${PWD-.}:/app
+       - ./backend:/app
+    env_file:
+      - ./backend/.env
     links:
       - php
-    env_file:
-      - .env
     networks:
       internal-network:
-      heimdall-backend-global:
+      heimdall-global:
         aliases:
           - heimdall-backend-nginx
 
   php:
     build: .docker/php
     volumes:
-      - ${PWD-.}:/app
-    links:
-      - postgres
+      - ./backend:/app
     working_dir: /app
     env_file:
-      - .env
+      - ./backend/.env
+    links:
+      - postgres
     networks:
       internal-network:
-      heimdall-backend-global:
+      heimdall-global:
         aliases:
           - heimdall-backend-php
 
@@ -53,5 +67,5 @@ volumes:
 
 networks:
   internal-network:
-  heimdall-backend-global:
+  heimdall-global:
     external: true

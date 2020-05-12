@@ -2,17 +2,17 @@
   <section class="section">
     <div class="columns is-mobile">
       <card
-        title="Free"
-        icon="github-circle"
+          title="Free"
+          icon="github-circle"
       >
         Open source on <a href="https://github.com/buefy/buefy">
-          GitHub
-        </a>
+        GitHub
+      </a>
       </card>
 
       <card
-        title="Responsive"
-        icon="cellphone-link"
+          title="Responsive"
+          icon="cellphone-link"
       >
         <b class="has-text-grey">
           Every
@@ -20,19 +20,19 @@
       </card>
 
       <card
-        title="Modern"
-        icon="alert-decagram"
+          title="Modern"
+          icon="alert-decagram"
       >
         Built with <a href="https://vuejs.org/">
-          Vue.js
-        </a> and <a href="http://bulma.io/">
-          Bulma
-        </a>
+        Vue.js
+      </a> and <a href="http://bulma.io/">
+        Bulma
+      </a>
       </card>
 
       <card
-        title="Lightweight"
-        icon="arrange-bring-to-front"
+          title="Lightweight"
+          icon="arrange-bring-to-front"
       >
         No other internal dependency
       </card>
@@ -41,13 +41,13 @@
 </template>
 
 <script>
-import Card from '~/components/Card'
+  import Card from '~/components/Card'
 
-export default {
-  name: 'HomePage',
+  export default {
+    name: 'HomePage',
 
-  components: {
-    Card
+    components: {
+      Card
+    }
   }
-}
 </script>

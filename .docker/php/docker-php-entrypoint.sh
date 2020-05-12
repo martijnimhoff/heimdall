@@ -5,15 +5,11 @@ warn() { echo "$@" >&2; }
 die() { warn "Fatal: $@"; exit 1; }
 
 configure_user() {
+    echo "Configuring user. I am currently: $(whoami)";
+
     USERNAME=php
-    if [ -z "$SKIP_CHANGING_USER_BECAUSE_I_USE_WINDOWS" ]; then
-         HOST_UID=$(stat -c %u docker-compose.yml)
-         HOST_GID=$(stat -c %g docker-compose.yml)
-    else
-         warn 'wAAAH YOU USING WINDOWS !!'
-         HOST_UID=$(id -u www-data)
-         HOST_GID=$(id -G www-data)
-    fi
+    HOST_UID=$(stat -c %u .)
+    HOST_GID=$(stat -c %g .)
 
     groupadd -f -g $HOST_GID $USERNAME || true
     useradd -o --shell /bin/bash -u $HOST_UID -g $HOST_GID -m $USERNAME || true
@@ -90,22 +86,12 @@ alias yrp="yarn run production"' >> /home/php/.bashrc
     fi
 }
 
-create_temp_folder() {
-    if [ ! -d '/temp' ]; then
-        mkdir -m 777 /temp
-        echo 'Temp folder created'
-    else
-        warn 'Temp folder in the root already exists'
-    fi
-}
-
 configure_user
 #configure_composer
 configure_xdebug
 configure_timezone
 configure_aliases
 #composer_install
-#create_temp_folder
 
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
