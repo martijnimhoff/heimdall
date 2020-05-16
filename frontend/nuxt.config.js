@@ -50,14 +50,16 @@ export default {
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     // Doc: https://auth.nuxtjs.org/
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    // Doc: https://github.com/nuxt-community/apollo-module
+    '@nuxtjs/apollo',
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'http://heimdall.local',
+    baseURL: 'http://heimdall.local:80',
     credentials: true
   },
   /*
@@ -88,6 +90,16 @@ export default {
   */
   router: {
     middleware: ['auth']
+  },
+  // Give apollo module options
+  apollo: {
+    tokenName: 'apollo-token',
+    authenticationType: 'Basic', // default: 'Bearer'
+    watchLoading: '~/plugins/apollo-watch-loading-handler.js',
+    errorHandler: '~/plugins/apollo-error-handler.js',
+    clientConfigs: {
+      default: '~/plugins/apollo-config',
+    }
   },
   /*
   ** Build configuration

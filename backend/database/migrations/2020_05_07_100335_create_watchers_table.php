@@ -27,7 +27,7 @@ class CreateWatchersTable extends Migration
             $table->text('url');
             $table->string('css_selector')->nullable();
 
-            $table->boolean('is_enabled')
+            $table->boolean('is_scanning')
                 ->default(true);
 
             $table->timestamps();

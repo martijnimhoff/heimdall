@@ -21,10 +21,3 @@ Route::middleware([
         return $request->user();
     });
 
-Route::middleware([
-    'auth:sanctum',
-    'verified',
-])
-    ->group(function () {
-        // Add all routes here
-    });

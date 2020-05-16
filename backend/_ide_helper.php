@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.10.3 on 2020-05-07 12:44:00.
+ * Generated for Laravel 7.10.3 on 2020-05-14 12:14:49.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15564,6 +15564,322 @@ namespace Facade\Ignition\Facades {
  
 }
 
+namespace Rebing\GraphQL\Support\Facades { 
+
+    /**
+     * 
+     *
+     * @method static array<string,object|string> getTypes()
+     */ 
+    class GraphQL {
+        
+        /**
+         * 
+         *
+         * @param \Schema|array|string|null $schema
+         * @return \Schema 
+         * @static 
+         */ 
+        public static function schema($schema = null)
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->schema($schema);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $query
+         * @param array|null $params
+         * @param array $opts Additional options, like 'schema', 'context' or 'operationName'
+         * @return array 
+         * @static 
+         */ 
+        public static function query($query, $params = [], $opts = [])
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->query($query, $params, $opts);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $query
+         * @param array|null $params
+         * @param array $opts Additional options, like 'schema', 'context' or 'operationName'
+         * @return \Rebing\GraphQL\ExecutionResult 
+         * @static 
+         */ 
+        public static function queryAndReturnResult($query, $params = [], $opts = [])
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->queryAndReturnResult($query, $params, $opts);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function addTypes($types)
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->addTypes($types);
+        }
+        
+        /**
+         * 
+         *
+         * @param object|string $class
+         * @param string|null $name
+         * @static 
+         */ 
+        public static function addType($class, $name = null)
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->addType($class, $name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function type($name, $fresh = false)
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->type($name, $fresh);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getType($name, $fresh = false)
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->getType($name, $fresh);
+        }
+        
+        /**
+         * 
+         *
+         * @param \Rebing\GraphQL\ObjectType|array|string $type
+         * @param \Rebing\GraphQL\array<string,string> $opts
+         * @return \Rebing\GraphQL\Type 
+         * @static 
+         */ 
+        public static function objectType($type, $opts = [])
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->objectType($type, $opts);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $name
+         * @param \Schema|array $schema
+         * @static 
+         */ 
+        public static function addSchema($name, $schema)
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->addSchema($name, $schema);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $name
+         * @param \Schema|array $schema
+         * @static 
+         */ 
+        public static function mergeSchemas($name, $schema)
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->mergeSchemas($name, $schema);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function clearType($name)
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->clearType($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function clearSchema($name)
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->clearSchema($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function clearTypes()
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->clearTypes();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function clearSchemas()
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->clearSchemas();
+        }
+        
+        /**
+         * 
+         *
+         * @return \Rebing\GraphQL\array<string,object|\Rebing\GraphQL\string> 
+         * @static 
+         */ 
+        public static function getTypes()
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->getTypes();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getSchemas()
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->getSchemas();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function paginate($typeName, $customName = null)
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->paginate($typeName, $customName);
+        }
+        
+        /**
+         * To add customs result to the query or mutations.
+         *
+         * @param string $typeName The original type name
+         * @param string $customTypeName The new type name
+         * @param string $wrapperTypeClass The class to create the new type
+         * @return \Rebing\GraphQL\Type 
+         * @static 
+         */ 
+        public static function wrapType($typeName, $customTypeName, $wrapperTypeClass)
+        {
+                        /** @var \Rebing\GraphQL\GraphQL $instance */
+                        return $instance->wrapType($typeName, $customTypeName, $wrapperTypeClass);
+        }
+        
+        /**
+         * 
+         *
+         * @see \GraphQL\Executor\ExecutionResult::setErrorFormatter
+         * @param \Error $e
+         * @return array 
+         * @static 
+         */ 
+        public static function formatError($e)
+        {
+                        return \Rebing\GraphQL\GraphQL::formatError($e);
+        }
+        
+        /**
+         * 
+         *
+         * @param \Error[] $errors
+         * @param callable $formatter
+         * @return \Error[] 
+         * @static 
+         */ 
+        public static function handleErrors($errors, $formatter)
+        {
+                        return \Rebing\GraphQL\GraphQL::handleErrors($errors, $formatter);
+        }
+        
+        /**
+         * Check if the schema expects a nest URI name and return the formatted version
+         * Eg. 'user/me'
+         * will open the query path /graphql/user/me.
+         *
+         * @param string $name
+         * @param string $schemaParameterPattern
+         * @param string $queryRoute
+         * @return string mixed
+         * @static 
+         */ 
+        public static function routeNameTransformer($name, $schemaParameterPattern, $queryRoute)
+        {
+                        return \Rebing\GraphQL\GraphQL::routeNameTransformer($name, $schemaParameterPattern, $queryRoute);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Rebing\GraphQL\GraphQL::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Rebing\GraphQL\GraphQL::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Rebing\GraphQL\GraphQL::hasMacro($name);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -18486,6 +18802,8 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
 
     class Flare extends \Facade\Ignition\Facades\Flare {}
+
+    class GraphQL extends \Rebing\GraphQL\Support\Facades\GraphQL {}
  
 }
 

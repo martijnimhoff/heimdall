@@ -36,11 +36,12 @@ class Watcher extends Model
     const COL_NAME = 'name';
     const COL_URL = 'url';
     const COL_CSS_SELECTOR = 'css_selector';
-    const COL_IS_ENABLED = 'is_enabled';
+    const COL_IS_SCANNING = 'is_scanning';
     const COL_CREATED_AT = 'created_at';
     const COL_UPDATED_AT = 'updated_at';
 
     const REL_TRIGGERS = 'triggers';
+    const REL_ENABLED_TRIGGERS = 'enabledTriggers';
     const REL_SCANS = 'scans';
     const REL_USER = 'user';
 
@@ -54,7 +55,7 @@ class Watcher extends Model
         self::COL_NAME,
         self::COL_URL,
         self::COL_CSS_SELECTOR,
-        self::COL_IS_ENABLED,
+        self::COL_IS_SCANNING,
     ];
 
     /*******************************
@@ -64,6 +65,12 @@ class Watcher extends Model
     public function triggers(): HasMany
     {
         return $this->hasMany(Trigger::class);
+    }
+
+    public function enabledTriggers(): HasMany
+    {
+        return $this->triggers()
+            ->where(Trigger::COL_IS_ENABLED, true);
     }
 
     public function scans(): HasMany

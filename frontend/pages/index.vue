@@ -1,14 +1,13 @@
 <template>
-  <section class="section">
-    <div class="columns is-mobile">
-      <card
-          title="Heimdall"
-          icon="user"
-      >
-        Watches over the internet
-      </card>
-    </div>
-  </section>
+  <div class="columns">
+    <card
+        title="Dashboard"
+        icon="desktop-mac-dashboard"
+        tooltip="I mean, it has a simple and intuitive design"
+    >
+      Well.. this dashboard is quite empty.
+    </card>
+  </div>
 </template>
 
 <script>

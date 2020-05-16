@@ -66,10 +66,9 @@
         try {
           // Prepare form data
           const formData = new FormData(this.$refs.loginform);
-          const jsonData = JSON.stringify(Object.fromEntries(formData));
 
           // Pass form data to `loginWith` function
-          await this.$auth.loginWith('local', {data: jsonData});
+          await this.$auth.loginWith('local', {data: formData});
         } catch (err) {
           this.error = err.response.data;
         }

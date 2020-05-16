@@ -56,7 +56,7 @@
         </ul>
       </aside>
 
-      <div class="container column is-10">
+      <div class="container column is-10 section">
         <nuxt/>
       </div>
     </section>
@@ -74,9 +74,14 @@
       return {
         items: [
           {
+            title: 'Dashboard',
+            icon: 'desktop-mac-dashboard',
+            to: {name: 'index'}
+          },
+          {
             title: 'Watchers',
             icon: 'lighthouse-on',
-            to: {name: 'index'}
+            to: {name: 'watcher'}
           },
           {
             title: 'Account',

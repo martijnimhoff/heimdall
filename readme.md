@@ -69,6 +69,8 @@ https://logomakr.com/2LuY63
 - rename Scan to Check. Because a Watcher Checks a Trigger to find out if the trigger needs to be triggered. These checks are stored so you can see what happened in the past.
 - Merge functionality of Triggers into a Watcher. It seems most watchers only will have one trigger.
 - Add a mailhog docker container for local development 
+- fix dotenv in frontend
+- rewrite as much as possible to TS
 
 ## how to:
 

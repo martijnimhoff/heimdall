@@ -9,21 +9,21 @@ use App\Notifications\HitNotify;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 
-class WatcherCheckTriggers extends Command
+class WatcherWatch extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'watcher:check-triggers';
+    protected $signature = 'watcher:watch';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Check all enabled trigger of all watchers';
+    protected $description = 'Make a scan and then check all enabled trigger of all watchers';
 
     /**
      * Create a new command instance.
@@ -47,7 +47,7 @@ class WatcherCheckTriggers extends Command
             Watcher::REL_TRIGGERS . '.' . Trigger::REL_TRIGGER_TYPE,
             Watcher::REL_USER,
         ])
-            ->where(Watcher::COL_IS_ENABLED, true)
+            ->where(Watcher::COL_IS_SCANNING, true)
             ->get();
 
         foreach ($watchers as $watcher) {

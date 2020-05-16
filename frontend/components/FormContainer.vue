@@ -1,5 +1,5 @@
 <template>
-  <div class="columns m-t-md">
+  <div class="columns">
     <div class="container column is-6">
       <article class="message">
         <div class="message-header is-info">

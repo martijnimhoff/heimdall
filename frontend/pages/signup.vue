@@ -63,11 +63,10 @@
 
     <div class="content" v-if="isSignupSuccessful">
       <p>
-        Your account was created successfully. Before you can start using your account, you need
-        to confirm your email.
+        Your account was created successfully.
       </p>
 
-      <p>We've send a confirmation link to {{ email }}.</p>
+      <p><nuxt-link :to="{name: 'login'}">Please click here to login.</nuxt-link></p>
     </div>
   </FormContainer>
 </template>
@@ -85,8 +84,7 @@
     data() {
       return {
         error: {},
-        isSignupSuccessful: false,
-        email: null
+        isSignupSuccessful: false
       }
     },
 
@@ -102,7 +100,6 @@
           await this.$axios.$post('/register', data);
 
           this.isSignupSuccessful = true;
-          this.email = data.email;
         } catch (err) {
           // console.log(err)
           this.error = err.response.data;
