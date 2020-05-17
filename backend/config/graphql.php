@@ -42,16 +42,20 @@ return [
     'schemas'               => [
         'default' => [
             'query'      => [
-                'hits'     => \App\GraphQL\Queries\HitsQuery::class,
-                'scans'    => \App\GraphQL\Queries\ScansQuery::class,
-                'trigger'  => \App\GraphQL\Queries\TriggerQuery::class,
-                'triggers' => \App\GraphQL\Queries\TriggersQuery::class,
-                'watcher'  => \App\GraphQL\Queries\WatcherQuery::class,
-                'watchers' => \App\GraphQL\Queries\WatchersQuery::class,
+                'hits'         => \App\GraphQL\Queries\HitsQuery::class,
+                'scans'        => \App\GraphQL\Queries\ScansQuery::class,
+                'trigger'      => \App\GraphQL\Queries\TriggerQuery::class,
+                'triggers'     => \App\GraphQL\Queries\TriggersQuery::class,
+                'triggerTypes' => \App\GraphQL\Queries\TriggerTypesQuery::class,
+                'watcher'      => \App\GraphQL\Queries\WatcherQuery::class,
+                'watchers'     => \App\GraphQL\Queries\WatchersQuery::class,
             ],
             'mutation'   => [
                 'createWatcher' => \App\GraphQL\Mutations\CreateWatcherMutation::class,
                 'updateWatcher' => \App\GraphQL\Mutations\UpdateWatcherMutation::class,
+                'createTrigger' => \App\GraphQL\Mutations\CreateTriggerMutation::class,
+                'updateTrigger' => \App\GraphQL\Mutations\UpdateTriggerMutation::class,
+                'deleteTrigger' => \App\GraphQL\Mutations\DeleteTriggerMutation::class,
             ],
             'middleware' => [],
             'method'     => [

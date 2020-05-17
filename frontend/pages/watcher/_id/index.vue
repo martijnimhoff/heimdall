@@ -24,6 +24,70 @@
             id: this.id
           }
         })
+      },
+      createTrigger() {
+        this.$router.push({
+          name: 'watcher-id-createTrigger',
+          params: {
+            id: this.id
+          }
+        })
+      },
+      editTrigger(triggerId) {
+        this.$router.push({
+          name: 'trigger-id-edit',
+          params: {
+            id: triggerId
+          }
+        })
+      },
+      toggleTrigger(triggerId, setEnabled) {
+        this.$apollo.mutate({
+          mutation: gql`mutation ($id: Int!, $isEnabled: Boolean!) {
+            updateTrigger(id: $id, is_enabled: $isEnabled) {
+              id
+              watcher_id
+              trigger_type_id
+              value_to_match
+              is_enabled
+              created_at
+              updated_at
+            }
+          }`,
+          variables: {
+            id: triggerId,
+            isEnabled: setEnabled
+          }
+        })
+          .then(() => {
+            const newState = setEnabled ? 'enabled' : 'disabled';
+
+            this.$buefy.toast.open({
+              message: `A trigger has been ${newState}.`,
+              type: 'is-success'
+            })
+          })
+      },
+      deleteTrigger(triggerId) {
+        this.$apollo.mutate({
+          mutation: gql`mutation ($id: Int!) {
+            deleteTrigger(id: $id) {
+              id
+            }
+          }`,
+          variables: {
+            id: triggerId
+          },
+          update: () => {
+            // TODO delete trigger from local cache
+          }
+        })
+          .then(() => {
+            this.$buefy.toast.open({
+              message: `Trigger has been deleted.`,
+              type: 'is-success'
+            })
+          })
       }
     },
     computed: {
@@ -127,9 +191,16 @@
           icon-left="pencil"
           label="edit"
       />
+      <b-button
+          outlined
+          class="is-primary"
+          @click="createTrigger"
+          icon-left="plus"
+          label="add trigger"
+      />
     </div>
 
-    <b-tabs v-model="activeTab" >
+    <b-tabs v-model="activeTab">
       <b-tab-item label="Info">
         <b-table :data="watcherData">
           <template slot-scope="props">
@@ -156,6 +227,38 @@
             </b-table-column>
             <b-table-column field="is_enabled" label="Is enabled">
               {{ props.row.is_enabled }}
+            </b-table-column>
+            <b-table-column custom-key="actions">
+              <b-button
+                  outlined
+                  class="is-primary is-small"
+                  @click="editTrigger(props.row.id)"
+                  icon-left="pencil"
+                  label="edit"
+              />
+              <b-button
+                  outlined
+                  class="is-danger is-small"
+                  @click="toggleTrigger(props.row.id, false)"
+                  icon-left="eye-off"
+                  label="disable"
+                  v-if="props.row.is_enabled"
+              />
+              <b-button
+                  outlined
+                  class="is-success is-small"
+                  @click="toggleTrigger(props.row.id, true)"
+                  icon-left="eye"
+                  label="enable"
+                  v-if="!props.row.is_enabled"
+              />
+              <b-button
+                  outlined
+                  class="is-danger is-small"
+                  @click="deleteTrigger(props.row.id)"
+                  icon-left="delete"
+                  label="delete"
+              />
             </b-table-column>
           </template>
         </b-table>
@@ -201,6 +304,7 @@
   .b-table {
     word-break: break-word;
   }
+
   .b-tabs .tab-content {
     padding: 0;
   }
