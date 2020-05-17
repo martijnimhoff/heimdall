@@ -32,3 +32,10 @@ $link-focus-border: $primary;
 // Import Bulma and Buefy styles
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
+
+
+.is-divider {
+  height: 2px;
+  background: lightgray;
+  margin: 1em 0;
+}

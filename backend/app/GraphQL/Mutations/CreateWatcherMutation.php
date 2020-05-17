@@ -48,22 +48,10 @@ class CreateWatcherMutation extends Mutation
     protected function rules(array $args = []): array
     {
         return [
-            Watcher::COL_NAME         => [
-                'required',
-                'max:255',
-            ],
-            Watcher::COL_URL          => [
-                'required',
-                'max:255',
-            ],
-            Watcher::COL_CSS_SELECTOR => [
-                'required',
-                'max:255',
-            ],
-            Watcher::COL_IS_SCANNING  => [
-                'required',
-                'boolean',
-            ],
+            Watcher::COL_NAME         => 'required|max:255',
+            Watcher::COL_URL          => 'required|max:255',
+            Watcher::COL_CSS_SELECTOR => 'required|max:255',
+            Watcher::COL_IS_SCANNING  => 'required|boolean',
         ];
     }
 

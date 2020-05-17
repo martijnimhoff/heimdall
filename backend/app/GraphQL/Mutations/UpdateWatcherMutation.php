@@ -52,23 +52,11 @@ class UpdateWatcherMutation extends Mutation
     protected function rules(array $args = []): array
     {
         return [
-            Watcher::COL_ID           => ['required'],
-            Watcher::COL_NAME         => [
-                'nullable',
-                'max:255',
-            ],
-            Watcher::COL_URL          => [
-                'nullable',
-                'max:255',
-            ],
-            Watcher::COL_CSS_SELECTOR => [
-                'nullable',
-                'max:255',
-            ],
-            Watcher::COL_IS_SCANNING  => [
-                'nullable',
-                'boolean',
-            ],
+            Watcher::COL_ID           => 'required',
+            Watcher::COL_NAME         => 'nullable|max:255',
+            Watcher::COL_URL          => 'nullable|max:255',
+            Watcher::COL_CSS_SELECTOR => 'nullable|max:255',
+            Watcher::COL_IS_SCANNING  => 'nullable|boolean',
         ];
     }
 

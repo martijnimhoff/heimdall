@@ -42,6 +42,10 @@ return [
     'schemas'               => [
         'default' => [
             'query'      => [
+                'hits'     => \App\GraphQL\Queries\HitsQuery::class,
+                'scans'    => \App\GraphQL\Queries\ScansQuery::class,
+                'trigger'  => \App\GraphQL\Queries\TriggerQuery::class,
+                'triggers' => \App\GraphQL\Queries\TriggersQuery::class,
                 'watcher'  => \App\GraphQL\Queries\WatcherQuery::class,
                 'watchers' => \App\GraphQL\Queries\WatchersQuery::class,
             ],
@@ -61,7 +65,11 @@ return [
     // facade like this: GraphQL::type('user')
     //
     'types'                 => [
-        'watcher' => \App\GraphQL\Type\WatcherType::class,
+        'watcher'     => \App\GraphQL\Types\WatcherType::class,
+        'hit'         => \App\GraphQL\Types\HitType::class,
+        'trigger'     => \App\GraphQL\Types\TriggerType::class,
+        'triggerType' => \App\GraphQL\Types\TriggerTypeType::class,
+        'scan'        => \App\GraphQL\Types\ScanType::class,
     ],
 
     // The types will be loaded on demand. Default is to load all types on each request

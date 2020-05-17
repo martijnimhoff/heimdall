@@ -1,6 +1,6 @@
 <?php
 
-namespace App\GraphQL\Type;
+namespace App\GraphQL\Types;
 
 use App\Models\Watcher;
 use GraphQL\Type\Definition\Type;

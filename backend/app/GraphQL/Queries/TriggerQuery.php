@@ -4,42 +4,38 @@ declare(strict_types=1);
 
 namespace App\GraphQL\Queries;
 
-use App\Models\Watcher;
+use App\Models\Trigger;
 use Closure;
 use GraphQL;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Query;
 
-class WatcherQuery extends Query
+class TriggerQuery extends Query
 {
     protected $attributes = [
-        'name'        => 'watcher',
-        'description' => 'Query a single watcher by id',
+        'name'        => 'trigger',
+        'description' => 'Query a single trigger by id',
     ];
 
     public function type(): Type
     {
-        return GraphQL::type('watcher');
+        return GraphQL::type('trigger');
     }
 
     public function args(): array
     {
         return [
-            Watcher::COL_ID => [
+            Trigger::COL_ID => [
                 'name'  => 'id',
                 'type'  => Type::int(),
-                'rules' => 'required',
+                'rules' => 'required|exists:triggers,id',
             ],
         ];
     }
 
     public function resolve($root, $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        return Watcher::findOrFail($args['id'])
-            ->loadCount([
-                Watcher::REL_ENABLED_TRIGGERS,
-                Watcher::REL_SCANS,
-            ]);
+        return Trigger::findOrFail($args['id']);
     }
 }
