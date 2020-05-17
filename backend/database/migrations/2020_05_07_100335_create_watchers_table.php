@@ -24,7 +24,7 @@ class CreateWatchersTable extends Migration
                 ->onDelete('cascade');
 
             $table->string('name');
-            $table->text('url');
+            $table->string('url');
             $table->string('css_selector')->nullable();
 
             $table->boolean('is_scanning')

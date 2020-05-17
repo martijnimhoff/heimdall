@@ -2,24 +2,30 @@
   <div class="lead">
     <h1 class="title">Watchers</h1>
     <div class="buttons">
-      <b-button outlined class="is-danger" @click="setScanning(false)">
-        <b-icon icon="lighthouse"></b-icon>
-        <span>Deactivate scanning</span>
+      <b-button class="is-primary" @click="goToCreateWatcher" icon-left="plus">
+        Create
       </b-button>
-      <b-button outlined class="is-success" @click="setScanning(true)">
-        <b-icon icon="lighthouse-on"></b-icon>
-        <span>Activate scanning</span>
+      <b-button outlined class="is-primary" v-if="selected" @click="editSelectedWatcher" icon-left="pencil">
+        Edit
       </b-button>
-      <b-button outlined class="is-info" :loading="$apollo.queries.watchers.loading" @click="reload">
-        <b-icon icon="sync"></b-icon>
-        <span>Reload</span>
+      <b-button outlined class="is-danger" @click="setScanning(false)" v-if="selected && selected.is_scanning" icon-left="lighthouse">
+        Deactivate
+      </b-button>
+      <b-button outlined class="is-success" @click="setScanning(true)" v-if="selected && !selected.is_scanning" icon-left="lighthouse-on">
+        Activate
+      </b-button>
+      <b-button outlined class="is-info" :loading="$apollo.queries.watchers.loading" @click="reload" icon-left="sync">
+        Reload
+      </b-button>
+      <b-button outlined class="is-dark" @click="selected = null" v-if="selected" icon-left="close">
+        Clear
       </b-button>
     </div>
     <b-table
         :data="watchers"
         :columns="columns"
-        :checked-rows.sync="checkedRows"
-        checkable
+        :selected.sync="selected"
+        focusable
     />
   </div>
 </template>
@@ -55,7 +61,7 @@
           }
         ],
         watchers: [],
-        checkedRows: []
+        selected: null
       }
     },
     methods: {
@@ -65,6 +71,36 @@
         this.$apollo.queries.watchers.refetch();
       },
       setScanning(isScanning) {
+        this.$apollo.mutate({
+          mutation: gql`mutation ($id: Int!, $isScanning: Boolean!) {
+            updateWatcher(id: $id, is_scanning: $isScanning) {
+              id
+              name
+              is_scanning
+              enabled_triggers_count
+              scans_count
+            }
+          }`,
+          variables: {
+            id: this.selected.id,
+            isScanning
+          }
+        })
+          .then(data => data.data.updateWatcher)
+          .then(updatedWatcher => {
+            this.$buefy.toast.open({
+              message: `${updatedWatcher.name} has been updated.`,
+              type: 'is-success'
+            })
+          })
+
+        // unselect, because the table automatically unselects because we update the watcher object in the apollo cache.
+        this.selected = null;
+      },
+      goToCreateWatcher() {
+
+      },
+      editSelectedWatcher() {
 
       }
     },

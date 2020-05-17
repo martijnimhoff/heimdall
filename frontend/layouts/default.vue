@@ -23,12 +23,11 @@
             <b-tooltip label="Are you sure you want to logout?"
                        position="is-left"
                        animated>
-              <button class="button is-light"
-                      @click="logout"
-                      v-if="$auth.loggedIn"
-              >
-                <b-icon icon="power"></b-icon>
-              </button>
+              <b-button class="is-light"
+                        @click="logout"
+                        v-if="$auth.loggedIn"
+                        icon-left="power"
+              />
             </b-tooltip>
           </div>
         </b-navbar-item>

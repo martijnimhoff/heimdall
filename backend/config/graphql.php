@@ -46,7 +46,8 @@ return [
                 'watchers' => \App\GraphQL\Queries\WatchersQuery::class,
             ],
             'mutation'   => [
-                'watcher' => \App\GraphQL\Mutations\WatcherMutation::class,
+                'createWatcher' => \App\GraphQL\Mutations\CreateWatcherMutation::class,
+                'updateWatcher' => \App\GraphQL\Mutations\UpdateWatcherMutation::class,
             ],
             'middleware' => [],
             'method'     => [
