@@ -1,32 +1,70 @@
 <template>
   <div class="lead">
     <h1 class="title">Watchers</h1>
-    <div class="buttons">
-      <b-button class="is-primary" @click="goToCreateWatcher" icon-left="plus">
-        Create
-      </b-button>
-      <b-button outlined class="is-primary" v-if="selected" @click="editSelectedWatcher" icon-left="pencil">
-        Edit
-      </b-button>
-      <b-button outlined class="is-danger" @click="setScanning(false)" v-if="selected && selected.is_scanning" icon-left="lighthouse">
-        Deactivate
-      </b-button>
-      <b-button outlined class="is-success" @click="setScanning(true)" v-if="selected && !selected.is_scanning" icon-left="lighthouse-on">
-        Activate
-      </b-button>
+    <div class="buttons is-pulled-right">
       <b-button outlined class="is-info" :loading="$apollo.queries.watchers.loading" @click="reload" icon-left="sync">
         Reload
       </b-button>
-      <b-button outlined class="is-dark" @click="selected = null" v-if="selected" icon-left="close">
-        Clear
+    </div>
+    <div class="buttons">
+      <b-button class="is-primary" @click="createWatcher" icon-left="plus">
+        Create
       </b-button>
     </div>
     <b-table
         :data="watchers"
-        :columns="columns"
-        :selected.sync="selected"
-        focusable
-    />
+        :striped="true"
+    >
+      <template slot-scope="props">
+        <b-table-column field="id" label="ID" width="40" numeric>
+          {{ props.row.id }}
+        </b-table-column>
+        <b-table-column field="name" label="Name">
+          {{ props.row.name }}
+        </b-table-column>
+        <b-table-column field="is_scanning" label="Is scanning">
+          {{ props.row.is_scanning }}
+        </b-table-column>
+        <b-table-column field="enabled_triggers_count" label="Active triggers">
+          {{ props.row.enabled_triggers_count }}
+        </b-table-column>
+        <b-table-column field="scans_count" label="Scans">
+          {{ props.row.scans_count }}
+        </b-table-column>
+
+        <b-table-column custom-key="actions">
+          <b-button
+              class="is-primary is-small"
+              @click="openWatcher(props.row)"
+              icon-left="eye"
+              label="view"
+          />
+          <b-button
+              outlined
+              class="is-primary is-small"
+              @click="editWatcher(props.row)"
+              icon-left="pencil"
+              label="edit"
+          />
+          <b-button
+              outlined
+              class="is-danger is-small"
+              @click="setScanning(props.row, false)"
+              icon-left="lighthouse"
+              label="deactivate"
+              v-if="props.row.is_scanning"
+          />
+          <b-button
+              outlined
+              class="is-success is-small"
+              @click="setScanning(props.row, true)"
+              icon-left="lighthouse-on"
+              label="activate"
+              v-if="!props.row.is_scanning"
+          />
+        </b-table-column>
+      </template>
+    </b-table>
   </div>
 </template>
 
@@ -61,16 +99,14 @@
           }
         ],
         watchers: [],
-        selected: null
       }
     },
     methods: {
       reload() {
         this.watchers = [];
-        this.checkedRows = [];
         this.$apollo.queries.watchers.refetch();
       },
-      setScanning(isScanning) {
+      setScanning(watcher, isScanning) {
         this.$apollo.mutate({
           mutation: gql`mutation ($id: Int!, $isScanning: Boolean!) {
             updateWatcher(id: $id, is_scanning: $isScanning) {
@@ -82,7 +118,7 @@
             }
           }`,
           variables: {
-            id: this.selected.id,
+            id: watcher.id,
             isScanning
           }
         })
@@ -93,15 +129,27 @@
               type: 'is-success'
             })
           })
-
-        // unselect, because the table automatically unselects because we update the watcher object in the apollo cache.
-        this.selected = null;
       },
-      goToCreateWatcher() {
-
+      createWatcher() {
+        this.$router.push({
+          name: 'watcher-create'
+        })
       },
-      editSelectedWatcher() {
-
+      openWatcher(watcher) {
+        this.$router.push({
+          name: 'watcher-id',
+          params: {
+            id: watcher.id
+          }
+        })
+      },
+      editWatcher(watcher) {
+        this.$router.push({
+          name: 'watcher-id-edit',
+          params: {
+            id: watcher.id
+          }
+        })
       }
     },
     apollo: {
@@ -119,7 +167,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-
-</style>

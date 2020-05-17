@@ -36,23 +36,20 @@
 
     <section class="main-content columns">
       <aside class="column is-2 section" v-if="$auth.loggedIn">
-        <p class="menu-label is-hidden-touch">
-          General
-        </p>
-        <ul class="menu-list">
-          <li
-              v-for="(item, key) of items"
-              :key="key"
-          >
-            <nuxt-link
-                :to="item.to"
-                exact-active-class="is-active"
-            >
-              <b-icon :icon="item.icon"/>
-              {{ item.title }}
-            </nuxt-link>
-          </li>
-        </ul>
+        <b-menu>
+          <b-menu-list label="Menu">
+            <b-menu-item
+                v-for="(menuItem, key) of items"
+                :key="key"
+                :icon="menuItem.icon"
+                :label="menuItem.title"
+                :to="menuItem.to"
+                tag="nuxt-link"
+                aria-role="menuitem"
+                :active="menuItem.to.name === $route.name"
+            />
+          </b-menu-list>
+        </b-menu>
       </aside>
 
       <div class="container column is-10 section">
