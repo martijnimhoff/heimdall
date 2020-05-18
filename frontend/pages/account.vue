@@ -1,3 +1,9 @@
+<script>
+  export default {
+    middleware: 'auth'
+  }
+</script>
+
 <template>
   <article class="message">
     <div class="message-header">
@@ -10,8 +16,3 @@
   </article>
 </template>
 
-<script>
-  export default {
-    middleware: 'auth'
-  }
-</script>

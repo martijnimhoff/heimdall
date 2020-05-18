@@ -1,3 +1,9 @@
+<script>
+  export default {
+    name: 'FormContainer'
+  }
+</script>
+
 <template>
   <div class="columns">
     <div class="container column is-6">
@@ -12,9 +18,3 @@
     </div>
   </div>
 </template>
-
-<script>
-  export default {
-    name: 'FormContainer'
-  }
-</script>

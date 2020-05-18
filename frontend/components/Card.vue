@@ -1,3 +1,23 @@
+<script>
+  export default {
+    props: {
+      title: {
+        type: String,
+        required: true
+      },
+      icon: {
+        type: String,
+        required: true
+      },
+      tooltip: {
+        type: String,
+        required: false,
+        default: null
+      }
+    }
+  }
+</script>
+
 <template>
   <div class="column">
     <div class="card">
@@ -27,23 +47,3 @@
     </div>
   </div>
 </template>
-
-<script>
-  export default {
-    props: {
-      title: {
-        type: String,
-        required: true
-      },
-      icon: {
-        type: String,
-        required: true
-      },
-      tooltip: {
-        type: String,
-        required: false,
-        default: null
-      }
-    }
-  }
-</script>

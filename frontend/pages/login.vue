@@ -1,3 +1,39 @@
+<script>
+  import FormContainer from "../components/FormContainer";
+
+  export default {
+    auth: 'guest',
+
+    components: {
+      FormContainer
+    },
+
+    data() {
+      return {
+        error: {}
+      }
+    },
+    mounted() {
+      // Before loading login page, obtain csrf cookie from the server.
+      this.$axios.$get('/sanctum/csrf-cookie');
+    },
+    methods: {
+      async login() {
+        this.error = {};
+        try {
+          // Prepare form data
+          const formData = new FormData(this.$refs.loginform);
+
+          // Pass form data to `loginWith` function
+          await this.$auth.loginWith('local', {data: formData});
+        } catch (err) {
+          this.error = err.response.data;
+        }
+      },
+    },
+  };
+</script>
+
 <template>
   <FormContainer>
     <template v-slot:title>
@@ -40,39 +76,3 @@
     </form>
   </FormContainer>
 </template>
-
-<script>
-  import FormContainer from "../components/FormContainer";
-
-  export default {
-    auth: 'guest',
-
-    components: {
-      FormContainer
-    },
-
-    data() {
-      return {
-        error: {}
-      }
-    },
-    mounted() {
-      // Before loading login page, obtain csrf cookie from the server.
-      this.$axios.$get('/sanctum/csrf-cookie');
-    },
-    methods: {
-      async login() {
-        this.error = {};
-        try {
-          // Prepare form data
-          const formData = new FormData(this.$refs.loginform);
-
-          // Pass form data to `loginWith` function
-          await this.$auth.loginWith('local', {data: formData});
-        } catch (err) {
-          this.error = err.response.data;
-        }
-      },
-    },
-  };
-</script>

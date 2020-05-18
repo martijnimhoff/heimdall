@@ -1,3 +1,45 @@
+<script>
+  import {mdiAccountCircle} from '@mdi/js';
+
+  export default {
+    components: {
+      mdiAccountCircle
+    },
+    data() {
+      return {
+        items: [
+          {
+            title: 'Dashboard',
+            icon: 'desktop-mac-dashboard',
+            to: {name: 'index'}
+          },
+          {
+            title: 'Watchers',
+            icon: 'lighthouse-on',
+            to: {name: 'watcher'}
+          },
+          {
+            title: 'Account',
+            icon: 'account-circle',
+            to: {name: 'account'}
+          },
+        ],
+        error: {}
+      }
+    },
+
+    methods: {
+      async logout() {
+        try {
+          await this.$auth.logout();
+        } catch (err) {
+          this.error = err.response.data;
+        }
+      }
+    }
+  }
+</script>
+
 <template>
   <div>
     <b-navbar class="header has-shadow is-dark">
@@ -58,45 +100,3 @@
     </section>
   </div>
 </template>
-
-<script>
-  import {mdiAccountCircle} from '@mdi/js';
-
-  export default {
-    components: {
-      mdiAccountCircle
-    },
-    data() {
-      return {
-        items: [
-          {
-            title: 'Dashboard',
-            icon: 'desktop-mac-dashboard',
-            to: {name: 'index'}
-          },
-          {
-            title: 'Watchers',
-            icon: 'lighthouse-on',
-            to: {name: 'watcher'}
-          },
-          {
-            title: 'Account',
-            icon: 'account-circle',
-            to: {name: 'account'}
-          },
-        ],
-        error: {}
-      }
-    },
-
-    methods: {
-      async logout() {
-        try {
-          await this.$auth.logout();
-        } catch (err) {
-          this.error = err.response.data;
-        }
-      }
-    }
-  }
-</script>

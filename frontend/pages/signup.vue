@@ -1,3 +1,41 @@
+<script>
+  import FormContainer from "../components/FormContainer";
+
+  export default {
+    auth: 'guest',
+
+    components: {
+      FormContainer
+    },
+
+    data() {
+      return {
+        error: {},
+        isSignupSuccessful: false
+      }
+    },
+
+    methods: {
+      async signup() {
+        this.error = {};
+        try {
+          // Prepare form data
+          const formData = new FormData(this.$refs.signupform);
+          const data = Object.fromEntries(formData);
+
+          // Register the account on the backend
+          await this.$axios.$post('/register', data);
+
+          this.isSignupSuccessful = true;
+        } catch (err) {
+          // console.log(err)
+          this.error = err.response.data;
+        }
+      }
+    }
+  }
+</script>
+
 <template>
   <FormContainer>
     <template v-slot:title>
@@ -70,41 +108,3 @@
     </div>
   </FormContainer>
 </template>
-
-<script>
-  import FormContainer from "../components/FormContainer";
-
-  export default {
-    auth: 'guest',
-
-    components: {
-      FormContainer
-    },
-
-    data() {
-      return {
-        error: {},
-        isSignupSuccessful: false
-      }
-    },
-
-    methods: {
-      async signup() {
-        this.error = {};
-        try {
-          // Prepare form data
-          const formData = new FormData(this.$refs.signupform);
-          const data = Object.fromEntries(formData);
-
-          // Register the account on the backend
-          await this.$axios.$post('/register', data);
-
-          this.isSignupSuccessful = true;
-        } catch (err) {
-          // console.log(err)
-          this.error = err.response.data;
-        }
-      }
-    }
-  }
-</script>
