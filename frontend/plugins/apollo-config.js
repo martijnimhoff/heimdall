@@ -30,6 +30,7 @@ export default (context) => {
     // Manually insert our own httplink
     link: authLink.concat(httpLink),
     // overwrite the default getAuth function, since that one is only needed when using a token based authentication. We use cookie based.
+    // As far as i know, this is a little performance optimalization and could be removed without breaking anything
     getAuth: () => {
       return undefined
     },

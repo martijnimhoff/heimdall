@@ -3,11 +3,9 @@
 
   export default {
     auth: 'guest',
-
     components: {
       FormContainer
     },
-
     data() {
       return {
         error: {}

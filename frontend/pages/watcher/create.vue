@@ -98,6 +98,11 @@
           </b-field>
 
           <b-button
+              outlined
+              @click.prevent="$router.back()"
+              label="Cancel"
+          />
+          <b-button
               class="button is-success"
               @click.prevent="createWatcher"
               label="Create"
