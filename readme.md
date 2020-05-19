@@ -44,19 +44,13 @@ npm install \
  && npm run dev 
 # ignore the url in the output
 ```
-- The frontend is accessible on: http://127.12.1.1:3000/
-- The backend is accessible on: http://127.12.1.1/
-- Sign up for an account, then login
-
-#### Optional steps
-
-- Add this to your host file: 
+- Add this to your hosts file: 
 ```
 127.12.1.1 heimdall.local
 ```
 - The frontend is now accessible on: http://heimdall.local:3000/
 - The backend is now accessible on: http://heimdall.local/
-- That looks a bit nicer :)
+- Sign up for an account, then login
 
 ## Database diagram: 
 https://app.diagrams.net/#G1gX2SlT6ayrsmtyJyJGoaQMoiMYClfyh2
@@ -66,13 +60,14 @@ https://logomakr.com/2LuY63
 
 ## Todo / Refactor ideas:
 
-- rename Scan to Check. Because a Watcher Checks a Trigger to find out if the trigger needs to be triggered. These checks are stored so you can see what happened in the past.
+- Rename Scan to Check. Because a Watcher Checks a Trigger to find out if the trigger needs to be triggered. These checks are stored so you can see what happened in the past.
 - Merge functionality of Triggers into a Watcher. It seems most watchers only will have one trigger.
 - Add a mailhog docker container for local development 
-- fix dotenv in frontend
-- rewrite as much as possible to TS
+- Fix dotenv in frontend
+- Rewrite as much as possible to TS
 - Authorization with policies
-- authentication via graphql instead of default laravel auth routes
+- Authentication via graphql instead of default laravel auth routes
+- Add tests
 
 ## how to:
 
