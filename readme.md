@@ -6,8 +6,7 @@ Heimdall watches over the internet and let's you know if something noteworthy ha
 
 Requirements for running this locally are:
 
-- Docker (tested with v19.03.8)
-- Ubuntu (tested with 20.04)
+- Docker (tested with v19.03.8 on Ubuntu 20.04)
 
 #### Steps:
 
@@ -47,6 +46,7 @@ npm install \
 ```
 - The frontend is accessible on: http://127.12.1.1:3000/
 - The backend is accessible on: http://127.12.1.1/
+- Sign up for an account, then login
 
 #### Optional steps
 
@@ -71,6 +71,8 @@ https://logomakr.com/2LuY63
 - Add a mailhog docker container for local development 
 - fix dotenv in frontend
 - rewrite as much as possible to TS
+- Authorization with policies
+- authentication via graphql instead of default laravel auth routes
 
 ## how to:
 

@@ -21,3 +21,4 @@ Route::middleware([
         return $request->user();
     });
 
+// This backend uses graphql, so there are hardly any routes here :)

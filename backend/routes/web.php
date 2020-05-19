@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+// This backend uses graphql, so there are hardly any routes here :)
