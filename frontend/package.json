@@ -24,12 +24,12 @@
     "graphql-tag": "^2.10.3",
     "js-cookie": "^2.2.1",
     "node-sass": "^7.0.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.12.2",
     "nuxt-buefy": "^0.3.30",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^13.2.0"
   },
   "devDependencies": {
-    "@nuxt/typescript-build": "^0.6.0",
+    "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^1.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
     "@vue/test-utils": "^1.0.3",
